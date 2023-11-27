@@ -11,30 +11,29 @@
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
     <children>
         <Text layoutX="276.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyTunes" />
-        <ListView fx:id="LstPlayList" layoutX="21.0" layoutY="111.0" prefHeight="237.0" prefWidth="192.0" />
-        <ListView fx:id="lstSongsList" layoutX="354.0" layoutY="111.0" prefHeight="237.0" prefWidth="231.0" />
+        <ListView fx:id="LstPlayList" layoutX="21.0" layoutY="129.0" prefHeight="329.0" prefWidth="216.0" />
+        <ListView fx:id="lstSongsList" layoutX="436.0" layoutY="129.0" prefHeight="329.0" prefWidth="249.0" />
         <Button fx:id="btnBackwardsMusic" layoutX="33.0" layoutY="29.0" mnemonicParsing="false" text="Backwards" />
         <Button fx:id="btnPlayMusic" layoutX="115.0" layoutY="29.0" mnemonicParsing="false" text="play" />
         <Button fx:id="btnForwardMusic" layoutX="159.0" layoutY="29.0" mnemonicParsing="false" text="Forward" />
-        <Button fx:id="btnSearchS" layoutX="534.0" layoutY="29.0" mnemonicParsing="false" text="Search" />
+        <Button fx:id="btnSearchS" layoutX="615.0" layoutY="37.0" mnemonicParsing="false" text="Search" />
         <Text layoutX="436.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-        <TextField fx:id="txtSearchS" layoutX="385.0" layoutY="29.0" promptText="Filter" />
-        <Slider fx:id="slidVolume" layoutX="56.0" layoutY="74.0" prefHeight="14.0" prefWidth="99.0" />
-        <Button fx:id="btnNewP" layoutX="21.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="New.." />
-        <Button fx:id="btnEditP" layoutX="77.0" layoutY="361.0" mnemonicParsing="false" text="Edit.." />
-        <Button fx:id="btnDeleteP" layoutX="134.0" layoutY="361.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="BtnUpSP" layoutX="211.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" text="Up" />
-        <Button layoutX="241.0" layoutY="361.0" mnemonicParsing="false" />
-        <Button fx:id="btnDownSP" layoutX="241.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="down" />
-        <Button fx:id="btnDeleteSP" layoutX="298.0" layoutY="361.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="btnNewS" layoutX="354.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="New.." />
-        <Button fx:id="btnEditS" layoutX="410.0" layoutY="361.0" mnemonicParsing="false" text="Edit..." />
-        <Button fx:id="btnDeleteS" layoutX="470.0" layoutY="361.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="btnCloseS" layoutX="534.0" layoutY="361.0" mnemonicParsing="false" text="Close" />
-        <Label fx:id="lblSName" layoutX="240.0" layoutY="64.0" text="(None) is playing..." />
-        <Text layoutX="22.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
-        <Text layoutX="230.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
-        <Text layoutX="354.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs" />
-      <ListView fx:id="lstOnSP" layoutX="220.0" layoutY="111.0" prefHeight="237.0" prefWidth="129.0" />
+        <TextField fx:id="txtSearchS" layoutX="460.0" layoutY="37.0" promptText="Filter" />
+        <Slider fx:id="slidVolume" layoutX="41.0" layoutY="73.0" prefHeight="14.0" prefWidth="99.0" />
+        <Button fx:id="btnNewP" layoutX="16.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="New.." />
+        <Button fx:id="btnEditP" layoutX="69.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
+        <Button fx:id="btnDeleteP" layoutX="164.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="BtnUpSP" layoutX="253.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" text="Up" />
+        <Button fx:id="btnDownSP" layoutX="289.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="down" />
+        <Button fx:id="btnDeleteSP" layoutX="349.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="btnNewS" layoutX="438.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="52.0" text="New.." />
+        <Button fx:id="btnEditS" layoutX="490.0" layoutY="461.0" mnemonicParsing="false" text="Edit..." />
+        <Button fx:id="btnDeleteS" layoutX="544.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="btnCloseS" layoutX="641.0" layoutY="461.0" mnemonicParsing="false" text="Close" />
+        <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" text="(None) is playing..." />
+        <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
+        <Text layoutX="255.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
+        <Text layoutX="444.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs" />
+      <ListView fx:id="lstOnSP" layoutX="254.0" layoutY="129.0" prefHeight="329.0" prefWidth="168.0" />
     </children>
 </AnchorPane>
