@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.MainController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainController">
     <children>
         <Text layoutX="276.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyTunes" />
         <ListView fx:id="LstPlayList" layoutX="21.0" layoutY="111.0" prefHeight="237.0" prefWidth="192.0" />
