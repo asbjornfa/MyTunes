@@ -14,8 +14,8 @@
         <ListView fx:id="LstPlayList" layoutX="21.0" layoutY="129.0" prefHeight="329.0" prefWidth="216.0" />
         <ListView fx:id="lstSongsList" layoutX="436.0" layoutY="129.0" prefHeight="329.0" prefWidth="249.0" />
         <Button fx:id="btnBackwardsMusic" layoutX="33.0" layoutY="29.0" mnemonicParsing="false" text="Backwards" />
-        <Button fx:id="btnPlayMusic" layoutX="115.0" layoutY="29.0" mnemonicParsing="false" text="play" />
-        <Button fx:id="btnForwardMusic" layoutX="159.0" layoutY="29.0" mnemonicParsing="false" text="Forward" />
+        <Button fx:id="btnPlayMusic" layoutX="115.0" layoutY="29.0" mnemonicParsing="false" onAction="#Play" text="play" />
+        <Button fx:id="btnForwardMusic" layoutX="223.0" layoutY="29.0" mnemonicParsing="false" text="Forward" />
         <Button fx:id="btnSearchS" layoutX="615.0" layoutY="37.0" mnemonicParsing="false" text="Search" />
         <Text layoutX="436.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" />
         <TextField fx:id="txtSearchS" layoutX="460.0" layoutY="37.0" promptText="Filter" />
@@ -30,10 +30,11 @@
         <Button fx:id="btnEditS" layoutX="490.0" layoutY="461.0" mnemonicParsing="false" text="Edit..." />
         <Button fx:id="btnDeleteS" layoutX="544.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
         <Button fx:id="btnCloseS" layoutX="641.0" layoutY="461.0" mnemonicParsing="false" text="Close" />
-        <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" text="(None) is playing..." />
+        <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" onMouseClicked="#chooseMusic" text="(None) is playing..." />
         <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
         <Text layoutX="255.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
         <Text layoutX="444.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs" />
       <ListView fx:id="lstOnSP" layoutX="254.0" layoutY="129.0" prefHeight="329.0" prefWidth="168.0" />
+      <Button fx:id="btnStopMusic" layoutX="164.0" layoutY="29.0" mnemonicParsing="false" onAction="#Stop" text="Stop" />
     </children>
 </AnchorPane>
