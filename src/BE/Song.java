@@ -46,5 +46,10 @@ public class Song {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return id + ": " + title + " ("+artist+")" + category;
+    }
+
 
 }

@@ -1,7 +1,9 @@
 package GUI.Controller;
 
+import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -9,8 +11,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
     @FXML
     private Button btnStopMusic;
     @FXML
@@ -57,6 +61,25 @@ public class MainController {
 
     private MediaPlayer mediaPlayer;
 
+    private SongModel songModel;
+
+    public MainController() {
+
+        try {
+            songModel = new SongModel();
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+    }
+
+    private void displayError(Throwable t) {
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
+    }
 
     public void chooseMusic(MouseEvent actionEvent) {
         FileChooser chooser = new FileChooser();
@@ -78,5 +101,10 @@ public class MainController {
 
     public void Stop(ActionEvent actionEvent) {
         mediaPlayer.stop();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }
