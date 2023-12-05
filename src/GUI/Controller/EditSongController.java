@@ -10,10 +10,14 @@ import javafx.stage.FileChooser;
 import java.io.File;
 
 
-public class EditSongWindow {
+public class EditSongController {
 
     public TextField txtFName;
     public Button btnChooseF;
+    public TextField txtEditTitle;
+    public TextField txtEditArtist;
+    public TextField txtEditCategory;
+    public TextField txtEditTime;
     private MediaPlayer mediaPlayer;
     public void ChooseFile(ActionEvent actionEvent) {
         FileChooser chooser = new FileChooser();
@@ -26,4 +30,5 @@ public class EditSongWindow {
             mediaPlayer.setOnReady(() -> txtFName.setText(file.getAbsolutePath()));
         }
     }
+    
 }
