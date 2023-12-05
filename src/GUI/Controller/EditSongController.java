@@ -8,6 +8,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.Objects;
 
 
 public class EditSongController {
@@ -30,5 +31,13 @@ public class EditSongController {
             mediaPlayer.setOnReady(() -> txtFName.setText(file.getAbsolutePath()));
         }
     }
-    
+    public void EditTitle {
+        String title = txtEditTitle.getText();
+        if (!title.isEmpty()) {
+            return title ;
+        } else {
+            System.out.println("Text field is empty");
+            // Do something when the text field is empty
+        }
+    }
 }
