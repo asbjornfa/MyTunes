@@ -1,29 +1,92 @@
 package GUI.Controller;
 
+import DAL.db.MyDatabaseConnector;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 
 public class EditSongController {
 
     public TextField txtFName;
     public Button btnChooseF;
-    private MediaPlayer mediaPlayer;
-    public void ChooseFile(ActionEvent actionEvent) {
+    public TextField txtEditTitle;
+    public TextField txtEditArtist;
+    public TextField txtEditCategory;
+    public TextField txtEditTime;
+
+    public void ChooseFile(ActionEvent actionEvent) throws SQLException, IOException {
         FileChooser chooser = new FileChooser();
-        chooser.setTitle("Select Your Music");
-        File file = chooser.showOpenDialog(null);
-        if(file != null){
-            String selectedFile = file.toURI().toString();
-            Media media = new Media(selectedFile);
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setOnReady(() -> txtFName.setText(file.getAbsolutePath()));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3"));
+
+        File selectedFile = chooser.showOpenDialog(new Stage());
+        if (selectedFile != null) {
+            saveMp3ToDatabase(selectedFile.getAbsolutePath());
         }
     }
+
+    private void saveMp3ToDatabase(String filePath) throws IOException {
+
+        MyDatabaseConnector databaseConnector = new MyDatabaseConnector();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+            String insertQuery = "INSERT INTO Songs (title, artist, category) VALUES (?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
+                String title = txtEditTitle.getText();
+                String artist = txtEditArtist.getText();
+                //String FilePath = txtFName.getText();
+                String category = txtEditCategory.getText();
+
+                preparedStatement.setString(1, title);
+                preparedStatement.setString(2, artist);
+                //preparedStatement.setString(3, FilePath);
+                preparedStatement.setString(3, category);
+
+                preparedStatement.executeUpdate();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    /*private String askUserForSongNameOrGenerateIt(String filePath) {
+        TextInputDialog dialog = new TextInputDialog("GenereretNavn");
+        dialog.setTitle("Indtast sangnavn");
+        dialog.setHeaderText("Indtast et navn for sangen eller brug det genererede navn:");
+        dialog.setContentText("Sangnavn:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        return result.orElse(generateSongNameFromFileName(filePath));
+    }
+
+    private String generateSongNameFromFileName(String filePath) {
+        String fileName = new File(filePath).getName();
+        int lastDotIndex = fileName.lastIndexOf(".");
+        if (lastDotIndex > 0) {
+            return fileName.substring(0, lastDotIndex);
+        } else {
+            return fileName;
+        }
+    }
+    /*public void EditTitle {
+        String title = txtEditTitle.getText();
+        if (!title.isEmpty()) {
+            return title ;
+        } else {
+            System.out.println("Text field is empty");
+            // Do something when the text field is empty
+        }
+    }*/
 }
