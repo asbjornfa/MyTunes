@@ -19,35 +19,45 @@ public class Song {
 
 
     public int getId() {
+
         return id;
     }
 
     public String getTitle() {
+
         return title;
     }
 
     public String getArtist() {
+
         return artist;
     }
 
     public String getCategory() {
+
         return category;
     }
 
+
+
     public void setTitle() {
+
         this.title = title;
     }
 
     public void setArtist() {
+
         this.artist = artist;
     }
 
     public void setCategory() {
+
         this.category = category;
     }
 
     @Override
     public String toString() {
+
         return id + ": " + title + " ("+artist+")" + category;
     }
 

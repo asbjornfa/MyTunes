@@ -24,7 +24,7 @@ public class SongDAO_DB implements ISongDataAccess {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
-            String sql = "SELECT * FROM dbo.Song";
+            String sql = "SELECT * FROM Songs";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -46,7 +46,7 @@ public class SongDAO_DB implements ISongDataAccess {
     @Override
     public Song createSong(Song song) throws Exception {
 
-        String sql = "INSERT INTO dbo.Song (Title, Artist, Category) VALUES (?,?,?);";
+        String sql = "INSERT INTO Songs (title, artist, category) VALUES (?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
@@ -88,7 +88,7 @@ public class SongDAO_DB implements ISongDataAccess {
 
     @Override
     public Song deleteSong(Song song) throws Exception {
-        String sql = "DELETE FROM dbo.Song WHERE ID = ?;";
+        String sql = "DELETE FROM Songs WHERE ID = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql))

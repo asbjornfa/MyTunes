@@ -5,14 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EditSongWindow">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.EditSongController">
    <children>
-      <TextField layoutX="106.0" layoutY="95.0" prefHeight="25.0" prefWidth="383.0" />
-      <TextField layoutX="107.0" layoutY="150.0" prefHeight="25.0" prefWidth="383.0" />
+      <TextField fx:id="txtEditTitle" layoutX="106.0" layoutY="95.0" prefHeight="25.0" prefWidth="383.0" />
+      <TextField fx:id="txtEditArtist" layoutX="107.0" layoutY="150.0" prefHeight="25.0" prefWidth="383.0" />
       <TextField fx:id="txtFName" layoutX="109.0" layoutY="312.0" prefHeight="25.0" prefWidth="383.0" />
-      <TextField layoutX="227.0" layoutY="200.0" />
-      <TextField layoutX="227.0" layoutY="255.0" />
+      <TextField fx:id="txtEditCategory" layoutX="227.0" layoutY="200.0" />
+      <TextField fx:id="txtEditTime" layoutX="227.0" layoutY="261.0" />
       <Button fx:id="btnChooseF" layoutX="492.0" layoutY="312.0" mnemonicParsing="false" onAction="#ChooseFile" text="Choose..." />
       <Label layoutX="286.0" layoutY="78.0" text="Title" />
       <Label layoutX="283.0" layoutY="133.0" text="Artist " />
