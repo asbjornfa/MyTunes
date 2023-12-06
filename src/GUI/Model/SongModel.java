@@ -20,6 +20,11 @@ public class SongModel {
         songsToBeViewed.addAll(songManager.getAllSongs());
     }
 
+    public void createNewSong(Song newSong) throws Exception {
+        Song s = songManager.createNewSong(newSong);
+        songsToBeViewed.add(s);
+    }
+
 
     public ObservableList<Song> getObservableSongs() {
 
@@ -32,10 +37,7 @@ public class SongModel {
         songsToBeViewed.addAll(searchResults);
     }
 
-    public void createNewSong(Song newSong) throws Exception {
-        Song s = songManager.createNewSong(newSong);
-        songsToBeViewed.add(s);
-    }
+
 
     public void deleteSong(Song song) throws Exception {
         songManager.deleteSong(song);

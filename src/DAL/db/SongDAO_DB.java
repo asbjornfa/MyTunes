@@ -34,7 +34,7 @@ public class SongDAO_DB implements ISongDataAccess {
                 String category = rs.getString("category");
                 String filePath = rs.getString("filePath");
 
-                Song song = new Song(id, title, artist, category);
+                Song song = new Song(id, title, artist, category, filePath);
                 allSongs.add(song);
             }
             return allSongs;
@@ -67,7 +67,7 @@ public class SongDAO_DB implements ISongDataAccess {
                 id = rs.getInt(1);
             }
 
-            Song createdSong = new Song(id, song.getTitle(), song.getArtist(), song.getCategory());
+            Song createdSong = new Song(id, song.getTitle(), song.getArtist(), song.getCategory(), song.getFilePath());
 
             return createdSong;
         }

@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.Song;
 import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -17,10 +19,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    @FXML
+    public TableColumn<Song, String> colTitle, colArtist, colCategory;
+    @FXML
+    public TableView<Song> tblSongs;
     @FXML
     private Button btnStopMusic;
     @FXML
-    private ListView LstPlayList;
+    private ListView<Song> LstPlayList;
     @FXML
     private Button btnBackwardsMusic;
     @FXML
@@ -110,7 +117,13 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TableView colums + BE getters
+        colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
+        colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
+        colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
 
+        // Sets items in tblSongs
+        tblSongs.setItems(songModel.getObservableSongs());
     }
 
     public void closeMain(ActionEvent actionEvent) {

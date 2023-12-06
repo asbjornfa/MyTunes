@@ -1,7 +1,10 @@
 package GUI.Controller;
 
+import BE.Song;
 import DAL.db.MyDatabaseConnector;
+import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -69,7 +72,26 @@ public class EditSongController {
         stage.close();
     }
 
-    public void AddEditSong(ActionEvent actionEvent) {
+    public void createNewSong(ActionEvent actionEvent) {
+        String title = txtEditTitle.getText();
+        String artist = txtEditArtist.getText();
+        String category = txtEditCategory.getText();
+        String filePath = txtFName.getText();
+
+        Song newSong = new Song(-1, title, artist, category, filePath);
+        try{
+            SongModel.createNewSong(newSong);
+        } catch (Exception e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+    }
+
+    private void displayError(Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong");
+        alert.setHeaderText(e.getMessage());
+        alert.showAndWait();
     }
 
 
