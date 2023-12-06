@@ -29,33 +29,47 @@ public class EditSongController {
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3"));
 
         File selectedFile = chooser.showOpenDialog(new Stage());
+
         if (selectedFile != null) {
-            saveMp3ToDatabase(selectedFile.getAbsolutePath());
+          //  saveMp3ToDatabase(selectedFile.getAbsolutePath());
+            txtEditTitle.setText(selectedFile.getName()); //tilføjelse af title
+          //  txtFName.setText(selectedFile.getAbsolutePath()); // og filePath
+            txtFName.setText(selectedFile.getName());
+
+
+
         }
     }
 
     private void saveMp3ToDatabase(String filePath) throws IOException {
-
         MyDatabaseConnector databaseConnector = new MyDatabaseConnector();
 
         try (Connection connection = databaseConnector.getConnection()) {
-            String insertQuery = "INSERT INTO Songs (title, artist, category) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO YTMusic.Songs (title, artist, category, filePath) VALUES (?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(insertQuery)) {
                 String title = txtEditTitle.getText();
                 String artist = txtEditArtist.getText();
-                //String FilePath = txtFName.getText();
                 String category = txtEditCategory.getText();
+
 
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, artist);
-                //preparedStatement.setString(3, FilePath);
                 preparedStatement.setString(3, category);
+                preparedStatement.setString(4, filePath);
 
                 preparedStatement.executeUpdate();
             }
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void editClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void AddEditSong(ActionEvent actionEvent) {
     }
 
 

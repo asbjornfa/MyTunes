@@ -3,10 +3,16 @@ package GUI.Controller;
 import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -105,5 +111,34 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void closeMain(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void clickOpenEdit(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditSongWindow.fxml"));
+            Parent root = loader.load();
+
+            Stage editStage = new Stage();
+            editStage.setTitle("Edit Song");
+            editStage.setScene(new Scene(root));
+
+            // Access the controller of the EditSong window if needed
+            //EditSongController editSongController = loader.getController();
+
+            // Show the EditSong window
+            editStage.show();
+        } catch (IOException e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+
+    }
+
+    public void Volume(MouseEvent mouseEvent) {
     }
 }

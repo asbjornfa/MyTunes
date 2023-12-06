@@ -24,14 +24,15 @@ public class SongDAO_DB implements ISongDataAccess {
         try (Connection conn = databaseConnector.getConnection();
              Statement stmt = conn.createStatement())
         {
-            String sql = "SELECT * FROM Songs";
+            String sql = "SELECT * FROM YTMusic.Songs";
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                int id = rs.getInt("Id");
-                String title = rs.getString("Title");
-                String artist = rs.getString("Artist");
-                String category = rs.getString("Category");
+                int id = rs.getInt("song_id");
+                String title = rs.getString("title");
+                String artist = rs.getString("artist");
+                String category = rs.getString("category");
+                String filePath = rs.getString("filePath");
 
                 Song song = new Song(id, title, artist, category);
                 allSongs.add(song);
@@ -39,6 +40,7 @@ public class SongDAO_DB implements ISongDataAccess {
             return allSongs;
         }
         catch (SQLException ex){
+            ex.printStackTrace();
             throw new Exception("Could not get songs from database", ex);
         }
     }
@@ -46,7 +48,7 @@ public class SongDAO_DB implements ISongDataAccess {
     @Override
     public Song createSong(Song song) throws Exception {
 
-        String sql = "INSERT INTO Songs (title, artist, category) VALUES (?,?,?);";
+        String sql = "INSERT INTO YTMusic.Songs (title, artist, category, filePath) VALUES (?,?,?,?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
@@ -88,7 +90,7 @@ public class SongDAO_DB implements ISongDataAccess {
 
     @Override
     public Song deleteSong(Song song) throws Exception {
-        String sql = "DELETE FROM Songs WHERE ID = ?;";
+        String sql = "DELETE FROM YTMusic.Songs WHERE ID = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql))
