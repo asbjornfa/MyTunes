@@ -27,7 +27,10 @@ public class SongDAO_DB implements ISongDataAccess {
             String sql = "SELECT * FROM YTMusic.Songs";
             ResultSet rs = stmt.executeQuery(sql);
 
+            // Loop through rows from the database result set
             while (rs.next()) {
+
+                // Map DB row to Song object
                 int id = rs.getInt("song_id");
                 String title = rs.getString("title");
                 String artist = rs.getString("artist");
@@ -53,21 +56,24 @@ public class SongDAO_DB implements ISongDataAccess {
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS))
         {
+            //bind our parameters
             stmt.setString(1,song.getTitle());
             stmt.setString(2,song.getArtist());
             stmt.setString(3,song.getCategory());
             stmt.setString(4,song.getFilePath());
 
+            // Run the specified SQL Statement
             stmt.executeUpdate();
 
+            // Get the generated ID from the DB
             ResultSet rs = stmt.getGeneratedKeys();
-
             int id = 0;
 
             if (rs.next()) {
                 id = rs.getInt(1);
             }
 
+            // Create song object and send up the layers
             Song createdSong = new Song(id, song.getTitle(), song.getArtist(), song.getCategory(), song.getFilePath());
 
             return createdSong;

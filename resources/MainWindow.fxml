@@ -15,7 +15,7 @@
         <Text layoutX="276.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyTunes" />
         <ListView fx:id="LstPlayList" layoutX="21.0" layoutY="129.0" prefHeight="329.0" prefWidth="216.0" />
         <Button fx:id="btnBackwardsMusic" layoutX="33.0" layoutY="29.0" mnemonicParsing="false" text="Backwards" />
-        <Button fx:id="btnPlayMusic" layoutX="115.0" layoutY="29.0" mnemonicParsing="false" onAction="#Play" text="play" />
+        <Button fx:id="btnPlayMusic" layoutX="115.0" layoutY="29.0" mnemonicParsing="false" onAction="#PlaySong" text="play" />
         <Button fx:id="btnForwardMusic" layoutX="223.0" layoutY="29.0" mnemonicParsing="false" text="Forward" />
         <Button fx:id="btnSearchS" layoutX="615.0" layoutY="37.0" mnemonicParsing="false" text="Search" />
         <Text layoutX="436.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" />
@@ -33,7 +33,7 @@
         <Text layoutX="255.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
         <Text layoutX="444.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs" />
       <ListView fx:id="lstOnSP" layoutX="254.0" layoutY="129.0" prefHeight="329.0" prefWidth="168.0" />
-      <Button fx:id="btnStopMusic" layoutX="164.0" layoutY="29.0" mnemonicParsing="false" onAction="#Stop" text="Stop" />
+      <Button fx:id="btnStopMusic" layoutX="164.0" layoutY="29.0" mnemonicParsing="false" onAction="#StopSong" text="Stop" />
       <TableView fx:id="tblSongs" layoutX="444.0" layoutY="129.0" prefHeight="329.0" prefWidth="225.0">
         <columns>
           <TableColumn fx:id="colTitle" prefWidth="75.0" text="Title" />

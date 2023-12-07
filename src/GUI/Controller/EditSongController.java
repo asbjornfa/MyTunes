@@ -1,7 +1,6 @@
 package GUI.Controller;
 
 import BE.Song;
-import DAL.db.MyDatabaseConnector;
 import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -12,8 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
@@ -34,7 +31,7 @@ public class EditSongController {
         File selectedFile = chooser.showOpenDialog(new Stage());
 
         if (selectedFile != null) {
-            txtEditTitle.setText(selectedFile.getName()); //tilføjelse af title
+            txtEditTitle.setText(selectedFile.getName()); // Tilføjelse af title
             txtFName.setText(selectedFile.getName()); // FilePath added
         }
     }

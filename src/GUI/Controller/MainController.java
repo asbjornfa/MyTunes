@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Song;
 import GUI.Model.SongModel;
+import GUI.MusicPlayer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,7 +71,10 @@ public class MainController implements Initializable {
 
     private MediaPlayer mediaPlayer;
 
+    private MusicPlayer musicPlayer;
+
     private SongModel songModel;
+
 
     public MainController() {
 
@@ -83,6 +84,8 @@ public class MainController implements Initializable {
             displayError(e);
             e.printStackTrace();
         }
+
+        musicPlayer = new MusicPlayer();
     }
 
     private void displayError(Throwable t) {
@@ -93,30 +96,27 @@ public class MainController implements Initializable {
         alert.showAndWait();
     }
 
-    // This method is moved to 'EditSongWindow'
+    public void PlaySong(ActionEvent actionEvent) {
+        playSelectedMusic();
+    }
 
-    /*public void chooseMusic(MouseEvent actionEvent) {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Select Your Music");
-        File file = chooser.showOpenDialog(null);
-        if(file != null){
-            String selectedFile = file.toURI().toString();
-            Media media = new Media(selectedFile);
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setOnReady(() -> lblSName.setText(file.getAbsolutePath()));
+    public void StopSong(ActionEvent actionEvent) {
+        stopSelectedMusic();
+    }
+    private void playSelectedMusic() {
+        Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+        if (selectedSong != null) {
+            String filePath = "data/audio/" + selectedSong.getFilePath();
+            musicPlayer.play(filePath);
         }
-
-    } */
-
-    public void Play(ActionEvent mouseEvent) {
-
-        mediaPlayer.play();
     }
 
-    public void Stop(ActionEvent actionEvent) {
+    private void stopSelectedMusic() {
 
-        mediaPlayer.stop();
+        musicPlayer.stop();
     }
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -128,14 +128,14 @@ public class MainController implements Initializable {
         // Sets items in tblSongs
         tblSongs.setItems(songModel.getObservableSongs());
         // Sets starting volume to 100
-        slidVolume.setValue(mediaPlayer.getVolume() *100);
+       /* slidVolume.setValue(mediaPlayer.getVolume() *100);
         slidVolume.valueProperty().addListener(new InvalidationListener() {
 
             @Override
             public void invalidated(Observable observable) {
                 mediaPlayer.setVolume(slidVolume.getValue() / 100);
             }
-        });
+        }); */
     }
 
     public void closeMain(ActionEvent actionEvent) {
@@ -164,10 +164,11 @@ public class MainController implements Initializable {
 
     }
 
+    /*
     public void Volume(MouseEvent mouseEvent) {
         mediaPlayer.setVolume(slidVolume.getValue() * 100);
         mediaPlayer.play();
-    }
+    } */
 
     public void DeleteSong(ActionEvent actionEvent) {
         Song selectedSongs = tblSongs.getSelectionModel().getSelectedItem();
@@ -200,5 +201,9 @@ public class MainController implements Initializable {
             displayError(e);
             e.printStackTrace();
         }
+    }
+
+
+    public void Volume(MouseEvent mouseEvent) {
     }
 }
