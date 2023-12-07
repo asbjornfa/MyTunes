@@ -80,15 +80,11 @@ public class SongDAO_DB implements ISongDataAccess {
 
     @Override
     public void updateSong(Song song) throws Exception {
-        /*
-        String sql = "UPDATE Song SET Title = ?, Artist = ?, Category = ? WHERE ID = ?;";
-
-        try (Connection conn = databaseConnector.getConnection());
-        PreparedStatement stmt = conn. */
         throw new UnsupportedOperationException();
+        /*String sql = "UPDATE YTMusic.Song SET title = ?, artist = ?, category = ? WHERE Song_id = ?";
 
+         */
     }
-
     @Override
     public Song deleteSong(Song song) throws Exception {
         String sql = "DELETE FROM YTMusic.Songs WHERE song_id = ?;";

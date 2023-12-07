@@ -169,4 +169,24 @@ public class MainController implements Initializable {
 
         }
     }
+
+    public void NewPlaylist(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewPlaylistWindow.fxml"));
+            Parent root = loader.load();
+
+            Stage editStage = new Stage();
+            editStage.setTitle("New Playlist");
+            editStage.setScene(new Scene(root));
+
+            // Access the controller of the EditSong window if needed
+            //EditSongController editSongController = loader.getController();
+
+            // Show the EditSong window
+            editStage.show();
+        } catch (IOException e) {
+            displayError(e);
+            e.printStackTrace();
+        }
+    }
 }
