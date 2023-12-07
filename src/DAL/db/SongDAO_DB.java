@@ -109,4 +109,6 @@ public class SongDAO_DB implements ISongDataAccess {
     public List<Song> searchSongs(String query) throws Exception {
         throw new UnsupportedOperationException();
     }
+
 }
+

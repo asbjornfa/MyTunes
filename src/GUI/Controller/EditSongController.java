@@ -55,6 +55,7 @@ public class EditSongController {
 
         SongModel songModel = new SongModel();
 
+
         try{
             songModel.createNewSong(newSong);
         } catch (Exception e) {
