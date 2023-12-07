@@ -153,5 +153,20 @@ public class MainController implements Initializable {
     }
 
     public void Volume(MouseEvent mouseEvent) {
+        mediaPlayer.setVolume(slidVolume.getValue() * 0.01);
+        mediaPlayer.play();
+    }
+
+    public void DeleteSong(ActionEvent actionEvent) {
+        Song selectedSongs = tblSongs.getSelectionModel().getSelectedItem();
+        if (selectedSongs != null) {
+            try {
+                songModel.deleteSong(selectedSongs);
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+
+        }
     }
 }

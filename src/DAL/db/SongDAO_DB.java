@@ -56,6 +56,7 @@ public class SongDAO_DB implements ISongDataAccess {
             stmt.setString(1,song.getTitle());
             stmt.setString(2,song.getArtist());
             stmt.setString(3,song.getCategory());
+            stmt.setString(4,song.getFilePath());
 
             stmt.executeUpdate();
 
@@ -73,7 +74,7 @@ public class SongDAO_DB implements ISongDataAccess {
         }
         catch (SQLException ex) {
             ex.printStackTrace();
-            throw new Exception("Could not create movie", ex);
+            throw new Exception("Could not add song", ex);
         }
     }
 
@@ -90,7 +91,7 @@ public class SongDAO_DB implements ISongDataAccess {
 
     @Override
     public Song deleteSong(Song song) throws Exception {
-        String sql = "DELETE FROM YTMusic.Songs WHERE ID = ?;";
+        String sql = "DELETE FROM YTMusic.Songs WHERE song_id = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql))
@@ -104,7 +105,7 @@ public class SongDAO_DB implements ISongDataAccess {
         catch (SQLException ex)
         {
             ex.printStackTrace();
-            throw new Exception("Could not create movie", ex);
+            throw new Exception("Could not delete song", ex);
         }
         return song;
     }

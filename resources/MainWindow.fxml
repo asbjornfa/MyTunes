@@ -28,7 +28,7 @@
         <Button fx:id="btnDownSP" layoutX="289.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="down" />
         <Button fx:id="btnDeleteSP" layoutX="349.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
         <Button fx:id="btnEditS" layoutX="440.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
-        <Button fx:id="btnDeleteS" layoutX="519.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="btnDeleteS" layoutX="519.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
         <Button fx:id="btnCloseS" layoutX="641.0" layoutY="461.0" mnemonicParsing="false" onAction="#closeMain" text="Close" />
         <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" text="(None) is playing..." />
         <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
