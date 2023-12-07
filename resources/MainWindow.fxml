@@ -20,15 +20,13 @@
         <Button fx:id="btnSearchS" layoutX="615.0" layoutY="37.0" mnemonicParsing="false" text="Search" />
         <Text layoutX="436.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" />
         <TextField fx:id="txtSearchS" layoutX="460.0" layoutY="37.0" promptText="Filter" />
-        <Slider fx:id="slidVolume" layoutX="41.0" layoutY="73.0" onDragDetected="#Volume" prefHeight="14.0" prefWidth="99.0" />
-        <Button fx:id="btnNewP" layoutX="16.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="New.." />
-        <Button fx:id="btnEditP" layoutX="69.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
+        <Slider fx:id="slidVolume" layoutX="41.0" layoutY="73.0" max="100" onDragDetected="#Volume" prefHeight="14.0" prefWidth="99.0" />
+        <Button layoutX="21.0" layoutY="461.0" mnemonicParsing="false" onAction="#NewPlaylist" prefHeight="25.0" prefWidth="48.0" text="New.." />
+        <Button fx:id="btnEditP" layoutX="84.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
         <Button fx:id="btnDeleteP" layoutX="164.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="BtnUpSP" layoutX="253.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="32.0" text="Up" />
-        <Button fx:id="btnDownSP" layoutX="289.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="48.0" text="down" />
-        <Button fx:id="btnDeleteSP" layoutX="349.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="btnEditS" layoutX="440.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
-        <Button fx:id="btnDeleteS" layoutX="519.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
+        <Button fx:id="btnDeleteSP" layoutX="255.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button fx:id="btnEditS" layoutX="444.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
+        <Button fx:id="btnDeleteS" layoutX="535.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
         <Button fx:id="btnCloseS" layoutX="641.0" layoutY="461.0" mnemonicParsing="false" onAction="#closeMain" text="Close" />
         <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" text="(None) is playing..." />
         <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />

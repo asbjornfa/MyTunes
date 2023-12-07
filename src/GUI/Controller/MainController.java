@@ -13,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -124,6 +127,15 @@ public class MainController implements Initializable {
 
         // Sets items in tblSongs
         tblSongs.setItems(songModel.getObservableSongs());
+        // Sets starting volume to 100
+        slidVolume.setValue(mediaPlayer.getVolume() *100);
+        slidVolume.valueProperty().addListener(new InvalidationListener() {
+
+            @Override
+            public void invalidated(Observable observable) {
+                mediaPlayer.setVolume(slidVolume.getValue() / 100);
+            }
+        });
     }
 
     public void closeMain(ActionEvent actionEvent) {
@@ -153,7 +165,7 @@ public class MainController implements Initializable {
     }
 
     public void Volume(MouseEvent mouseEvent) {
-        mediaPlayer.setVolume(slidVolume.getValue() * 0.01);
+        mediaPlayer.setVolume(slidVolume.getValue() * 100);
         mediaPlayer.play();
     }
 
