@@ -3,11 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NewPlaylistWindow">
+<AnchorPane prefHeight="100.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NewPlaylistWindow">
    <children>
-      <TextField fx:id="txtNewPName" layoutX="54.0" layoutY="63.0" prefHeight="25.0" prefWidth="291.0" />
-      <Button layoutX="174.0" layoutY="142.0" mnemonicParsing="false" onAction="#createNewPlaylist" text="Add" />
+      <TextField fx:id="txtNewPName" layoutX="71.0" layoutY="44.0" prefHeight="25.0" prefWidth="238.0" promptText="Add Name" />
+      <Button layoutX="348.0" layoutY="44.0" mnemonicParsing="false" onAction="#createNewPlaylist" text="Add" />
+      <Text layoutX="157.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New PLaylist" />
    </children>
 </AnchorPane>

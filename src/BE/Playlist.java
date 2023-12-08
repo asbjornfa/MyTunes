@@ -2,17 +2,17 @@ package BE;
 
 public class Playlist {
 
-    private int id;
+    private int pid;
 
     private String playlist_name;
 
-    public Playlist(int id, String playList_name) {
-        this.id = id;
+    public Playlist(int pid, String playList_name) {
+        this.pid = pid;
         this.playlist_name = playList_name;
     }
 
-    public int getId() {
-        return id;
+    public int getpId() {
+        return pid;
     }
 
     public String getPlaylist_name() {
@@ -22,4 +22,12 @@ public class Playlist {
     public void setPlaylist_name() {
         this.playlist_name = playlist_name;
     }
+
+
+    public String toString() {
+
+        return pid + ": " + playlist_name;
+    }
+
+
 }

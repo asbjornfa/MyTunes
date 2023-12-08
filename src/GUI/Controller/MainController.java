@@ -25,6 +25,7 @@ public class MainController implements Initializable {
     public TableColumn<Song, String> colTitle, colArtist, colCategory;
     @FXML
     public TableView<Song> tblSongs;
+    public TableView tblPlaylist;
     @FXML
     private Button btnStopMusic;
     @FXML
@@ -103,6 +104,16 @@ public class MainController implements Initializable {
     public void StopSong(ActionEvent actionEvent) {
         stopSelectedMusic();
     }
+
+    public void PauseSong(ActionEvent actionEvent) {
+        pauseSelectedMusic();
+    }
+
+    public void TableUpdate() {
+        tblSongs.refresh();
+    }
+
+    // Overvej om de her selected methoder skal med, tror man kan skrive det nemmere.
     private void playSelectedMusic() {
         Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
         if (selectedSong != null) {
@@ -111,11 +122,15 @@ public class MainController implements Initializable {
         }
     }
 
+
     private void stopSelectedMusic() {
 
         musicPlayer.stop();
     }
 
+    private void pauseSelectedMusic() {
+        musicPlayer.pause();
+    }
 
 
     @Override
@@ -127,6 +142,15 @@ public class MainController implements Initializable {
 
         // Sets items in tblSongs
         tblSongs.setItems(songModel.getObservableSongs());
+
+
+        txtSearchS.textProperty().addListener(((observable, oldValue, newValue) -> {
+            try {
+                songModel.searchSong(newValue);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
         // Sets starting volume to 100
        /* slidVolume.setValue(mediaPlayer.getVolume() *100);
         slidVolume.valueProperty().addListener(new InvalidationListener() {
@@ -148,12 +172,17 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditSongWindow.fxml"));
             Parent root = loader.load();
 
+            EditSongController editSongController = loader.getController();
+
+            editSongController.setMainController(this);
+
+
+
             Stage editStage = new Stage();
             editStage.setTitle("Edit Song");
             editStage.setScene(new Scene(root));
 
             // Access the controller of the EditSong window if needed
-            //EditSongController editSongController = loader.getController();
 
             // Show the EditSong window
             editStage.show();
@@ -161,7 +190,6 @@ public class MainController implements Initializable {
             displayError(e);
             e.printStackTrace();
         }
-
     }
 
     /*
@@ -195,14 +223,15 @@ public class MainController implements Initializable {
             // Access the controller of the EditSong window if needed
             //EditSongController editSongController = loader.getController();
 
-            // Show the EditSong window
-            editStage.show();
         } catch (IOException e) {
             displayError(e);
             e.printStackTrace();
         }
     }
 
+    public void addSongToTable(Song song) {
+        tblSongs.getItems().add(song);
+    }
 
     public void Volume(MouseEvent mouseEvent) {
     }
