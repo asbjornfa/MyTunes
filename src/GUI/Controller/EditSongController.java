@@ -1,10 +1,13 @@
 package GUI.Controller;
 
 import BE.Song;
+import GUI.Main;
 import GUI.Model.SongModel;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -22,7 +25,15 @@ public class EditSongController {
     public TextField txtEditTitle;
     public TextField txtEditArtist;
     public TextField txtEditCategory;
-    public TextField txtEditTime;
+
+
+    public MainController mainController;
+
+
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     public void ChooseFile(ActionEvent actionEvent) throws SQLException, IOException {
         FileChooser chooser = new FileChooser();
@@ -49,9 +60,9 @@ public class EditSongController {
         String filePath = txtFName.getText();
 
         Song newSong = new Song(-1, title, artist, category, filePath);
+        mainController.addSongToTable(newSong);
 
         SongModel songModel = new SongModel();
-
 
         try{
             songModel.createNewSong(newSong);

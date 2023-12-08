@@ -41,5 +41,6 @@
             <TableColumn fx:id="colCategory" prefWidth="75.0" text="Category" />
         </columns>
       </TableView>
+      <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
     </children>
 </AnchorPane>
