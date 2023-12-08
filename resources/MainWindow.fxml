@@ -48,5 +48,8 @@
 =======
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
 >>>>>>> 9d3f81ac8fb6e4e0f1b9f597cefc5809438d2066
+=======
+      <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
+>>>>>>> 9d3f81ac8fb6e4e0f1b9f597cefc5809438d2066
     </children>
 </AnchorPane>
