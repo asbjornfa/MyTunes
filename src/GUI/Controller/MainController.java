@@ -1,6 +1,8 @@
 package GUI.Controller;
 
+import BE.Playlist;
 import BE.Song;
+import GUI.Model.PlaylistModel;
 import GUI.Model.SongModel;
 import GUI.MusicPlayer;
 import javafx.event.ActionEvent;
@@ -12,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,8 +25,10 @@ public class MainController implements Initializable {
     @FXML
     public TableColumn<Song, String> colTitle, colArtist, colCategory;
     @FXML
+    public TableColumn<Playlist, String> colPName;
+    @FXML
     public TableView<Song> tblSongs;
-    public TableView tblPlaylist;
+    public TableView<Playlist> tblPlaylist;
     @FXML
     private Button btnStopMusic;
     @FXML
@@ -45,52 +48,33 @@ public class MainController implements Initializable {
     @FXML
     private Slider slidVolume;
     @FXML
-    private Button btnNewP;
-    @FXML
-    private Button btnEditP;
-    @FXML
-    private Button btnDeleteP;
-    @FXML
-    private Button BtnUpSP;
-    @FXML
-    private Button btnDownSP;
-    @FXML
-    private Button btnDeleteSP;
-    @FXML
-    private Button btnNewS;
-    @FXML
-    private Button btnEditS;
-    @FXML
-    private Button btnDeleteS;
-    @FXML
-    private Button btnCloseS;
-    @FXML
     private Label lblSName;
     @FXML
     private ListView lstOnSP;
 
 
-    private MediaPlayer mediaPlayer;
+
+    //private MediaPlayer mediaPlayer;
 
     private MusicPlayer musicPlayer;
 
     private SongModel songModel;
 
+    private PlaylistModel playlistModel;
+
 
     public MainController() {
-
         try {
             songModel = new SongModel();
+            playlistModel = new PlaylistModel();
         } catch (Exception e) {
             displayError(e);
             e.printStackTrace();
         }
-
         musicPlayer = new MusicPlayer();
     }
 
     private void displayError(Throwable t) {
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Something went wrong");
         alert.setHeaderText(t.getMessage());
@@ -124,7 +108,6 @@ public class MainController implements Initializable {
 
 
     private void stopSelectedMusic() {
-
         musicPlayer.stop();
     }
 
@@ -140,15 +123,24 @@ public class MainController implements Initializable {
         colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-        // Sets items in tblSongs
-        tblSongs.setItems(songModel.getObservableSongs());
+        colPName.setCellValueFactory(new PropertyValueFactory<>("playlist_name"));
 
+        // Sets items in tblSongs
+
+
+        if (songModel != null) {
+            tblSongs.setItems(songModel.getObservableSongs());
+        }
+
+        if (playlistModel != null) {
+            tblPlaylist.setItems(playlistModel.getObservablePlaylists());
+        }
 
         txtSearchS.textProperty().addListener(((observable, oldValue, newValue) -> {
             try {
                 songModel.searchSong(newValue);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }));
         // Sets starting volume to 100
@@ -173,18 +165,12 @@ public class MainController implements Initializable {
             Parent root = loader.load();
 
             EditSongController editSongController = loader.getController();
-
             editSongController.setMainController(this);
-
-
 
             Stage editStage = new Stage();
             editStage.setTitle("Edit Song");
             editStage.setScene(new Scene(root));
 
-            // Access the controller of the EditSong window if needed
-
-            // Show the EditSong window
             editStage.show();
         } catch (IOException e) {
             displayError(e);
@@ -211,17 +197,32 @@ public class MainController implements Initializable {
         }
     }
 
+    public void DeletePlaylist(ActionEvent actionEvent) {
+        Playlist selectedPlaylist = tblPlaylist.getSelectionModel().getSelectedItem();
+        if (selectedPlaylist != null) {
+            try {
+                playlistModel.deletePlaylist(selectedPlaylist);
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+
+        }
+    }
+
     public void NewPlaylist(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewPlaylistWindow.fxml"));
             Parent root = loader.load();
 
-            Stage editStage = new Stage();
-            editStage.setTitle("New Playlist");
-            editStage.setScene(new Scene(root));
+            NewPlaylistWindow newPlaylistWindow = loader.getController();
+            newPlaylistWindow.setMainController(this);
 
-            // Access the controller of the EditSong window if needed
-            //EditSongController editSongController = loader.getController();
+            Stage pStage = new Stage();
+            pStage.setTitle("New Playlist");
+            pStage.setScene(new Scene(root));
+
+            pStage.show();
 
         } catch (IOException e) {
             displayError(e);
@@ -233,6 +234,12 @@ public class MainController implements Initializable {
         tblSongs.getItems().add(song);
     }
 
+    public void addPlaylistToTable(Playlist playlist) {
+        tblPlaylist.getItems().add(playlist);
+    }
+
     public void Volume(MouseEvent mouseEvent) {
     }
+
+
 }

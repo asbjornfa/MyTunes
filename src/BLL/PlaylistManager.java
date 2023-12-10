@@ -9,12 +9,10 @@ import java.util.List;
 
 public class PlaylistManager {
 
-
-    public Playlist createNewPlaylist;
     private IPlaylistDataAccess playlistDAO;
 
     public PlaylistManager() throws IOException {
-        //songDAO = new
+
         playlistDAO = new PlaylistDAO_DB();
     }
 

@@ -1,13 +1,10 @@
 package GUI.Controller;
 
 import BE.Song;
-import GUI.Main;
 import GUI.Model.SongModel;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -32,6 +29,7 @@ public class EditSongController {
 
 
     public void setMainController(MainController mainController) {
+
         this.mainController = mainController;
     }
 

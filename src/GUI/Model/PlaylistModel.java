@@ -1,8 +1,6 @@
 package GUI.Model;
 
 import BE.Playlist;
-
-import BE.Song;
 import BLL.PlaylistManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,7 +25,6 @@ public class PlaylistModel {
 
 
     public ObservableList<Playlist> getObservablePlaylists() {
-
         return playlistsToBeViewed;
     }
 
@@ -36,8 +33,5 @@ public class PlaylistModel {
         playlistManager.deletePlaylist(playlist);
         playlistsToBeViewed.remove(playlist);
     }
-
-
-
 
 }

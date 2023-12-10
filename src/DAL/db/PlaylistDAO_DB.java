@@ -2,12 +2,11 @@ package DAL.db;
 
 
 import BE.Playlist;
-
 import DAL.IPlaylistDataAccess;
-
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistDAO_DB implements IPlaylistDataAccess {
@@ -17,14 +16,43 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         databaseConnector = new MyDatabaseConnector();
     }
 
+    @Override
+    public List<Playlist> getAllplaylists() throws Exception {
+        ArrayList<Playlist> allPlaylists = new ArrayList<>();
 
-    public Playlist createPlaylistPlaylist(Playlist playlist) throws Exception {
+        try (Connection conn = databaseConnector.getConnection();
+             Statement stmt = conn.createStatement())
+        {
+            String sql = "SELECT * FROM YTMusic.Playlists";
+            ResultSet rs = stmt.executeQuery(sql);
 
-        String sql = "INSERT INTO YTMusic.Playlist (playList_name) VALUES (?,?);";
+            // Loop through rows from the database result set
+            while (rs.next()) {
+
+                // Map DB row to Song object
+                int id = rs.getInt("playlist_id");
+                String name = rs.getString("playlist_name");
+
+
+                Playlist playlist = new Playlist(id, name);
+                allPlaylists.add(playlist);
+            }
+            return allPlaylists;
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+            throw new Exception("Could not get songs from database", ex);
+        }
+    }
+
+    public Playlist createPlaylist(Playlist playlist) throws Exception {
+
+        String sql = "INSERT INTO YTMusic.Playlists (playList_name) VALUES (?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             //bind our parameters
+
             stmt.setString(1, playlist.getPlaylist_name());
 
 
@@ -49,15 +77,15 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
-    public void updatePLaylist(Playlist playlist) throws Exception {
+    public void updatePlaylist(Playlist playlist) throws Exception {
         throw new UnsupportedOperationException();
         /*String sql = "UPDATE YTMusic.Song SET title = ?, artist = ?, category = ? WHERE Song_id = ?";
 
          */
     }
 
-    public Playlist deletePLaylist(Playlist playlist) throws Exception {
-        String sql = "DELETE FROM YTMusic.Songs WHERE playlist_id = ?;";
+    public Playlist deletePlaylist(Playlist playlist) throws Exception {
+        String sql = "DELETE FROM YTMusic.Playlists WHERE playlist_id = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -70,28 +98,10 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             ex.printStackTrace();
             throw new Exception("Could not delete playlist", ex);
         }
+
+
         return playlist;
-
-
     }
 
-    @Override
-    public List<Playlist> getAllplaylists() throws Exception {
-        return null;
-    }
 
-    @Override
-    public Playlist createPlaylist(Playlist playlist) throws Exception {
-        return null;
-    }
-
-    @Override
-    public void updatePlaylist(Playlist playlist) throws Exception {
-
-    }
-
-    @Override
-    public Playlist deletePlaylist(Playlist playlist) throws Exception {
-        return null;
-    }
 }

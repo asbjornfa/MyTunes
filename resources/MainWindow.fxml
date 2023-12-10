@@ -20,13 +20,13 @@
         <Text layoutX="436.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" />
         <TextField fx:id="txtSearchS" layoutX="460.0" layoutY="37.0" promptText="Filter" />
         <Slider fx:id="slidVolume" layoutX="41.0" layoutY="73.0" max="100" onDragDetected="#Volume" prefHeight="14.0" prefWidth="99.0" />
-        <Button layoutX="21.0" layoutY="461.0" mnemonicParsing="false" onAction="#NewPlaylist" prefHeight="25.0" prefWidth="48.0" text="New.." />
-        <Button fx:id="btnEditP" layoutX="84.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
-        <Button fx:id="btnDeleteP" layoutX="164.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="btnDeleteSP" layoutX="255.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
-        <Button fx:id="btnEditS" layoutX="444.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
-        <Button fx:id="btnDeleteS" layoutX="535.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
-        <Button fx:id="btnCloseS" layoutX="641.0" layoutY="461.0" mnemonicParsing="false" onAction="#closeMain" text="Close" />
+        <Button layoutX="17.0" layoutY="461.0" mnemonicParsing="false" onAction="#NewPlaylist" prefHeight="25.0" prefWidth="48.0" text="New.." />
+        <Button layoutX="84.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
+        <Button layoutX="164.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeletePlaylist" text="Delete" />
+        <Button layoutX="255.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
+        <Button layoutX="444.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
+        <Button layoutX="535.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
+        <Button layoutX="641.0" layoutY="461.0" mnemonicParsing="false" onAction="#closeMain" text="Close" />
         <Label fx:id="lblSName" layoutX="275.0" layoutY="80.0" text="(None) is playing..." />
         <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
         <Text layoutX="255.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
@@ -42,14 +42,11 @@
       </TableView>
       <TableView fx:id="tblPlaylist" layoutX="14.0" layoutY="129.0" prefHeight="329.0" prefWidth="225.0">
          <columns>
-            <TableColumn prefWidth="224.0" text="Playlist Name" />
+            <TableColumn fx:id="colPName" prefWidth="224.0" text="Playlist Name" />
          </columns>
       </TableView>
-=======
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
->>>>>>> 9d3f81ac8fb6e4e0f1b9f597cefc5809438d2066
-=======
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
->>>>>>> 9d3f81ac8fb6e4e0f1b9f597cefc5809438d2066
+
     </children>
 </AnchorPane>

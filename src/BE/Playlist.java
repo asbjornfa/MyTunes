@@ -12,14 +12,17 @@ public class Playlist {
     }
 
     public int getpId() {
+
         return pid;
     }
 
     public String getPlaylist_name() {
+
         return playlist_name;
     }
 
     public void setPlaylist_name() {
+
         this.playlist_name = playlist_name;
     }
 

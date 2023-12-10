@@ -9,6 +9,6 @@
    <children>
       <TextField fx:id="txtNewPName" layoutX="71.0" layoutY="44.0" prefHeight="25.0" prefWidth="238.0" promptText="Add Name" />
       <Button layoutX="348.0" layoutY="44.0" mnemonicParsing="false" onAction="#createNewPlaylist" text="Add" />
-      <Text layoutX="157.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New PLaylist" />
+      <Text layoutX="157.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Playlist" />
    </children>
 </AnchorPane>

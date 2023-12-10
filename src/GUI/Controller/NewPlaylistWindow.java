@@ -1,9 +1,7 @@
 package GUI.Controller;
 
 import BE.Playlist;
-import BE.Song;
 import GUI.Model.PlaylistModel;
-import GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -13,14 +11,23 @@ import javafx.stage.Stage;
 public class NewPlaylistWindow {
     public TextField txtNewPName;
 
-    public Playlist createNewPlaylist(ActionEvent actionEvent) throws Exception {
+    public MainController mainController;
+
+
+
+    public void setMainController(MainController mainController) {
+
+        this.mainController = mainController;
+    }
+
+    public void createNewPlaylist(ActionEvent actionEvent) throws Exception {
         String playList_name = txtNewPName.getText();
 
 
         Playlist newPlaylist = new Playlist(-1, playList_name);
+        mainController.addPlaylistToTable(newPlaylist);
+
         PlaylistModel playlistmodel = new PlaylistModel();
-
-
 
         try{
             playlistmodel.createNewPlaylist(newPlaylist);
@@ -28,11 +35,9 @@ public class NewPlaylistWindow {
             displayError(e);
             e.printStackTrace();
         }
-        return newPlaylist;
-        /*Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        stage.close();
 
-         */
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 

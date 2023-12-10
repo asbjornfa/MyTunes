@@ -27,7 +27,6 @@ public class SongModel {
 
 
     public ObservableList<Song> getObservableSongs() {
-
         return songsToBeViewed;
     }
 
@@ -36,7 +35,6 @@ public class SongModel {
         songsToBeViewed.clear();
         songsToBeViewed.addAll(searchResults);
     }
-
 
 
     public void deleteSong(Song song) throws Exception {
