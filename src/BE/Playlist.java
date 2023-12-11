@@ -1,12 +1,21 @@
 package BE;
+import java.util.List;
 
 public class Playlist {
 
     private int pid;
+    private String name;
+    /*private List<Song> songs;
 
-    private String playlist_name;
+    public List<Song> getSongs(){
+        return songs;
+    }
+    public void setSongs(){
+        this.songs = songs;
+    }
 
-    public Playlist(int pid, String playList_name) {
+     */
+    public Playlist(int pid, String name) {
         this.pid = pid;
         this.name = name;
     }

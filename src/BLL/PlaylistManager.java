@@ -3,7 +3,7 @@ package BLL;
 import BE.Playlist;
 import DAL.IPlaylistDataAccess;
 import DAL.db.PlaylistDAO_DB;
-
+import BE.Song;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,5 +27,14 @@ public class PlaylistManager {
     public void deletePlaylist(Playlist playlist) throws Exception {
         playlistDAO.deletePlaylist(playlist);
     }
+
+    /*public void addSongToPlaylist(Song song, Playlist playlist){
+
+    }
+    public void removeSongFromPlaylist(Song song, Playlist playlist){
+
+    }
+
+     */
 
 }
