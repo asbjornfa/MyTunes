@@ -5,6 +5,7 @@ import BE.Song;
 import GUI.Model.PlaylistModel;
 import GUI.Model.SongModel;
 import GUI.MusicPlayer;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,8 +38,6 @@ public class MainController implements Initializable {
     private Button btnBackwardsMusic;
     @FXML
     private Button btnPlayMusic;
-    @FXML
-    private ListView lstSongsList;
     @FXML
     private Button btnForwardMusic;
     @FXML
@@ -123,7 +122,7 @@ public class MainController implements Initializable {
         colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-        colPName.setCellValueFactory(new PropertyValueFactory<>("playlist_name"));
+        colPName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         // Sets items in tblSongs
 
@@ -135,6 +134,13 @@ public class MainController implements Initializable {
         if (playlistModel != null) {
             tblPlaylist.setItems(playlistModel.getObservablePlaylists());
         }
+
+        tblPlaylist.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, oldValue, newValue) -> {
+                    if (newValue != null) {
+                        System.out.println("works" + newValue);
+                    }
+                });
 
         txtSearchS.textProperty().addListener(((observable, oldValue, newValue) -> {
             try {

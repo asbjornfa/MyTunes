@@ -31,7 +31,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
 
                 // Map DB row to Song object
                 int id = rs.getInt("playlist_id");
-                String name = rs.getString("playlist_name");
+                String name = rs.getString("name");
 
 
                 Playlist playlist = new Playlist(id, name);
@@ -47,13 +47,13 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
 
     public Playlist createPlaylist(Playlist playlist) throws Exception {
 
-        String sql = "INSERT INTO YTMusic.Playlists (playList_name) VALUES (?);";
+        String sql = "INSERT INTO YTMusic.Playlists (name) VALUES (?);";
 
         try (Connection conn = databaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             //bind our parameters
 
-            stmt.setString(1, playlist.getPlaylist_name());
+            stmt.setString(1, playlist.getPName());
 
 
             // Run the specified SQL Statement
@@ -68,7 +68,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             }
 
             // Create playlist object and send up the layers
-            Playlist createdPLaylist = new Playlist(id, playlist.getPlaylist_name());
+            Playlist createdPLaylist = new Playlist(id, playlist.getPName());
 
             return createdPLaylist;
         } catch (SQLException ex) {

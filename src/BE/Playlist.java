@@ -8,7 +8,7 @@ public class Playlist {
 
     public Playlist(int pid, String playList_name) {
         this.pid = pid;
-        this.playlist_name = playList_name;
+        this.name = name;
     }
 
     public int getpId() {
@@ -16,20 +16,20 @@ public class Playlist {
         return pid;
     }
 
-    public String getPlaylist_name() {
+    public String getPName() {
 
-        return playlist_name;
+        return name;
     }
 
-    public void setPlaylist_name() {
+    public void setName() {
 
-        this.playlist_name = playlist_name;
+        this.name = name;
     }
 
 
     public String toString() {
 
-        return pid + ": " + playlist_name;
+        return pid + ": " + name;
     }
 
 

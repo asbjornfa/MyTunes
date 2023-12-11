@@ -27,6 +27,7 @@ public class SongModel {
 
 
     public ObservableList<Song> getObservableSongs() {
+
         return songsToBeViewed;
     }
 
