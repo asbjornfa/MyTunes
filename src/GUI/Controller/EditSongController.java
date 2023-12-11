@@ -49,6 +49,8 @@ public class EditSongController {
     public void editClose(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         stage.close();
+
+        //closing stage
     }
 
     public void createNewSong(ActionEvent actionEvent) throws Exception {
