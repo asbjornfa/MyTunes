@@ -5,7 +5,6 @@ import BE.Song;
 import GUI.Model.PlaylistModel;
 import GUI.Model.SongModel;
 import GUI.MusicPlayer;
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,9 +30,9 @@ public class MainController implements Initializable {
     public TableView<Song> tblSongs;
     public TableView<Playlist> tblPlaylist;
     @FXML
-    private Button btnStopMusic;
+    private ListView lstSP;
     @FXML
-    private ListView<Song> LstPlayList;
+    private Button btnStopMusic;
     @FXML
     private Button btnBackwardsMusic;
     @FXML
@@ -48,8 +47,7 @@ public class MainController implements Initializable {
     private Slider slidVolume;
     @FXML
     private Label lblSName;
-    @FXML
-    private ListView lstOnSP;
+
 
 
 
@@ -134,6 +132,7 @@ public class MainController implements Initializable {
         if (playlistModel != null) {
             tblPlaylist.setItems(playlistModel.getObservablePlaylists());
         }
+
 
         tblPlaylist.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {

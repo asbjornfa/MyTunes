@@ -1,5 +1,4 @@
 package BE;
-import java.util.List;
 
 public class Playlist {
 
@@ -13,8 +12,8 @@ public class Playlist {
     public void setSongs(){
         this.songs = songs;
     }
+    */
 
-     */
     public Playlist(int pid, String name) {
         this.pid = pid;
         this.name = name;
@@ -25,7 +24,7 @@ public class Playlist {
         return pid;
     }
 
-    public String getPName() {
+    public String getName() {
 
         return name;
     }

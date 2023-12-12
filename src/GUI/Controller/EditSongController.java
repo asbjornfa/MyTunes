@@ -38,7 +38,7 @@ public class EditSongController {
 
     public void ChooseFile(ActionEvent actionEvent) throws SQLException, IOException {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3", "*.wav"));
 
         // Set the initial directory before showing the dialog
         File initialDirectory = new File("data/audio/");
@@ -73,6 +73,7 @@ public class EditSongController {
 
         Song newSong = new Song(-1, title, artist, category, filePath);
         mainController.addSongToTable(newSong);
+
 
         SongModel songModel = new SongModel();
 

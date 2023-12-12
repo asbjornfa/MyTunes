@@ -31,7 +31,7 @@
         <Text layoutX="22.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Playlist" />
         <Text layoutX="255.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs on Playlist" />
         <Text layoutX="444.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Songs" />
-      <ListView fx:id="lstOnSP" layoutX="254.0" layoutY="129.0" prefHeight="329.0" prefWidth="168.0" />
+      <ListView fx:id="lstSP" layoutX="254.0" layoutY="129.0" prefHeight="329.0" prefWidth="168.0" />
       <Button fx:id="btnStopMusic" layoutX="164.0" layoutY="29.0" mnemonicParsing="false" onAction="#StopSong" text="Stop" />
       <TableView fx:id="tblSongs" layoutX="444.0" layoutY="129.0" prefHeight="329.0" prefWidth="225.0">
         <columns>

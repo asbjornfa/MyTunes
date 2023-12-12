@@ -53,7 +53,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             //bind our parameters
 
-            stmt.setString(1, playlist.getPName());
+            stmt.setString(1, playlist.getName());
 
 
             // Run the specified SQL Statement
@@ -68,7 +68,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             }
 
             // Create playlist object and send up the layers
-            Playlist createdPLaylist = new Playlist(id, playlist.getPName());
+            Playlist createdPLaylist = new Playlist(id, playlist.getName());
 
             return createdPLaylist;
         } catch (SQLException ex) {
@@ -95,8 +95,9 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             stmt.executeUpdate();
             // Run the specified SQL statement
         } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw new Exception("Could not delete playlist", ex);
+            throw new RuntimeException(ex);
+            //ex.printStackTrace();
+            //throw new Exception("Could not delete playlist", ex);
         }
 
 

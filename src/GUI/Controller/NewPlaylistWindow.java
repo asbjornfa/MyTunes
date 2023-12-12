@@ -21,10 +21,10 @@ public class NewPlaylistWindow {
     }
 
     public void createNewPlaylist(ActionEvent actionEvent) throws Exception {
-        String playList_name = txtNewPName.getText();
+        String name = txtNewPName.getText();
 
 
-        Playlist newPlaylist = new Playlist(-1, playList_name);
+        Playlist newPlaylist = new Playlist(-1, name);
         mainController.addPlaylistToTable(newPlaylist);
 
         PlaylistModel playlistmodel = new PlaylistModel();
