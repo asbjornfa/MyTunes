@@ -140,5 +140,20 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
+    public void deleteFromPlaylist(Song song) throws Exception {
+        String sql = "Delete from YTMusic.SongsInPlaylist where song_id = ? ";
+
+        try(Connection conn = databaseConnector.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql)) {
+            // Bind parameters
+            stmt.setInt(1, song.getId());
+
+            stmt.executeUpdate();
+            // Run the specified SQL statement
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
 
 }

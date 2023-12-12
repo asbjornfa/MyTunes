@@ -49,8 +49,6 @@ public class MainController implements Initializable {
     private Label lblSName;
 
 
-
-
     //private MediaPlayer mediaPlayer;
 
     private MusicPlayer musicPlayer;
@@ -220,8 +218,8 @@ public class MainController implements Initializable {
         }
     }
 
-    public void DeletePlaylistSong() {
-
+    public void DeleteSongInPlaylist(ActionEvent actionEvent) {
+        // Skal implemere funktioner
     }
 
     public void NewPlaylist(ActionEvent actionEvent) {
@@ -248,12 +246,39 @@ public class MainController implements Initializable {
         tblSongs.getItems().add(song);
     }
 
+
     public void addPlaylistToTable(Playlist playlist) {
+
         tblPlaylist.getItems().add(playlist);
     }
 
     public void Volume(MouseEvent mouseEvent) {
     }
 
+
+    public void AddSongsToPlaylist(ActionEvent actionEvent) {
+        Playlist selectedPlaylist = tblPlaylist.getSelectionModel().getSelectedItem();
+        Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
+
+        if (selectedPlaylist == null || selectedSong == null) {
+            alertbox("Could not add song to playlist", "You did not select a song or playlist");
+        }
+        if (selectedPlaylist != null && selectedSong != null) {
+            try {
+                playlistModel.addSongsToPlaylist(selectedSong, selectedPlaylist);
+                playlistModel.loadSongsForPlaylist(selectedPlaylist.getpId());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+        private void alertbox (String title, String content){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
 
 }

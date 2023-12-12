@@ -47,6 +47,8 @@
       </TableView>
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
+      <Button layoutX="318.0" layoutY="461.0" mnemonicParsing="false" onAction="#AddSongsToPlaylist" text="addToPlaylist" />
+      <Button layoutX="373.0" layoutY="417.0" mnemonicParsing="false" onAction="#DeleteSongInPlaylist" text="DeleteSP" />
 
     </children>
 </AnchorPane>

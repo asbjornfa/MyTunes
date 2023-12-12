@@ -40,4 +40,13 @@ public class PlaylistModel {
         return FXCollections.observableArrayList(playlistManager.getAllSongsInPlaylist(playlistId));
     }
 
+
+
+    public void addSongsToPlaylist(Song selectedSong, Playlist selectedPlaylist) {
+
+    }
+
+    public void loadSongsForPlaylist(int i) {
+
+    }
 }
