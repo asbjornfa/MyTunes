@@ -1,6 +1,7 @@
 package GUI.Model;
 
 import BE.Playlist;
+import BE.Song;
 import BLL.PlaylistManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,11 @@ public class PlaylistModel {
     public void deletePlaylist(Playlist playlist) throws Exception {
         playlistManager.deletePlaylist(playlist);
         playlistsToBeViewed.remove(playlist);
+    }
+
+    public ObservableList<Song> getSongsForPlaylist(Playlist playlist) throws Exception {
+        int playlistId = playlist.getpId();
+        return FXCollections.observableArrayList(playlistManager.getAllSongsInPlaylist(playlistId));
     }
 
 }

@@ -137,7 +137,12 @@ public class MainController implements Initializable {
         tblPlaylist.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if (newValue != null) {
-                        System.out.println("works" + newValue);
+                        try {
+                            lstSP.setItems(playlistModel.getSongsForPlaylist(newValue));
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                        //System.out.println("works" + newValue);
                     }
                 });
 
@@ -213,6 +218,10 @@ public class MainController implements Initializable {
             }
 
         }
+    }
+
+    public void DeletePlaylistSong() {
+
     }
 
     public void NewPlaylist(ActionEvent actionEvent) {

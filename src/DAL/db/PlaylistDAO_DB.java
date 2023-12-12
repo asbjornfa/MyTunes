@@ -2,6 +2,7 @@ package DAL.db;
 
 
 import BE.Playlist;
+import BE.Song;
 import DAL.IPlaylistDataAccess;
 
 import java.io.IOException;
@@ -45,6 +46,44 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
+    public List<Song> getAllSongsInPlaylist(int playlist_id) {
+        ArrayList<Song> allSongsInPlaylists = new ArrayList<>();
+
+        String sql = "SELECT s.*, sip.playlist_id\n" +
+                "FROM YTMusic.Songs s\n" +
+                "INNER JOIN YTMusic.SongsInPlaylist sip ON s.song_id = sip.song_id\n" +
+                "WHERE sip.playlist_id = (?);";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql))
+        {
+
+            stmt.setInt(1, playlist_id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            // Loop through rows from the database result set
+            while (rs.next()) {
+
+                // Map DB row to Song object
+                int id = rs.getInt("song_id");
+                String title = rs.getString("title");
+                String artist = rs.getString("artist");
+                String category = rs.getString("category");
+                String filePath = rs.getString("filePath");
+
+                // Create Song object
+                Song song = new Song(id, title, artist, category, filePath);
+                allSongsInPlaylists.add(song);
+            }
+            return allSongsInPlaylists;
+        }
+        catch (SQLException ex){
+            ex.printStackTrace();
+            throw new RuntimeException("Could not get songs from database", ex);
+        }
+    }
+
     public Playlist createPlaylist(Playlist playlist) throws Exception {
 
         String sql = "INSERT INTO YTMusic.Playlists (name) VALUES (?);";
@@ -84,7 +123,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
          */
     }
 
-    public Playlist deletePlaylist(Playlist playlist) throws Exception {
+    public void deletePlaylist(Playlist playlist) throws Exception {
         String sql = "DELETE FROM YTMusic.Playlists WHERE playlist_id = ?;";
 
         try (Connection conn = databaseConnector.getConnection();
@@ -99,9 +138,6 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             //ex.printStackTrace();
             //throw new Exception("Could not delete playlist", ex);
         }
-
-
-        return playlist;
     }
 
 

@@ -20,6 +20,10 @@ public class PlaylistManager {
         return playlistDAO.getAllplaylists();
     }
 
+    public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception {
+        return playlistDAO.getAllSongsInPlaylist(playlistId);
+    }
+
     public Playlist createNewPlaylist(Playlist newPlaylist) throws Exception {
         return playlistDAO.createPlaylist(newPlaylist);
     }
