@@ -23,7 +23,6 @@
         <Button layoutX="17.0" layoutY="461.0" mnemonicParsing="false" onAction="#NewPlaylist" prefHeight="25.0" prefWidth="48.0" text="New.." />
         <Button layoutX="84.0" layoutY="461.0" mnemonicParsing="false" text="Edit.." />
         <Button layoutX="164.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeletePlaylist" text="Delete" />
-        <Button layoutX="255.0" layoutY="461.0" mnemonicParsing="false" text="Delete" />
         <Button layoutX="444.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickOpenEdit" text="New/Edit..." />
         <Button layoutX="535.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
         <Button layoutX="641.0" layoutY="461.0" mnemonicParsing="false" onAction="#closeMain" text="Close" />
@@ -47,8 +46,8 @@
       </TableView>
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
       <Button layoutX="189.0" layoutY="60.0" mnemonicParsing="false" onAction="#PauseSong" text="Button" />
-      <Button layoutX="318.0" layoutY="461.0" mnemonicParsing="false" onAction="#AddSongsToPlaylist" text="addToPlaylist" />
-      <Button layoutX="373.0" layoutY="417.0" mnemonicParsing="false" onAction="#DeleteSongInPlaylist" text="DeleteSP" />
+      <Button layoutX="335.0" layoutY="461.0" mnemonicParsing="false" onAction="#AddSongsToPlaylist" text="addToPlaylist" />
+      <Button layoutX="255.0" layoutY="461.0" mnemonicParsing="false" onAction="#DeleteSongInPlaylist" text="DeleteSP" />
 
     </children>
 </AnchorPane>

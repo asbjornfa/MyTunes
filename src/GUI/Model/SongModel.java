@@ -1,6 +1,8 @@
 package GUI.Model;
 
+import BE.Playlist;
 import BE.Song;
+import BLL.PlaylistManager;
 import BLL.SongManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,12 +12,13 @@ import java.util.List;
 public class SongModel {
 
     private ObservableList<Song> songsToBeViewed;
-
+    private PlaylistManager playlistManager;
     private SongManager songManager;
 
 
     public SongModel() throws Exception {
-        songManager = new SongManager();
+        this.playlistManager = new PlaylistManager();
+        this.songManager = new SongManager();
         songsToBeViewed = FXCollections.observableArrayList();
         songsToBeViewed.addAll(songManager.getAllSongs());
     }
@@ -27,7 +30,6 @@ public class SongModel {
 
 
     public ObservableList<Song> getObservableSongs() {
-
         return songsToBeViewed;
     }
 
@@ -43,5 +45,23 @@ public class SongModel {
         songsToBeViewed.remove(song);
     }
 
+    public void deleteSongFromPlaylist(Song selectedSong, Playlist selectedPlaylist) {
+        // Validate parameters
+        if (selectedSong == null || selectedPlaylist == null) {
+            throw new IllegalArgumentException("Selected song and playlist cannot be null.");
+        }
 
+        try {
+            if (playlistManager == null) {
+                playlistManager = new PlaylistManager();
+            }
+            // Delete the selected song from the playlist using PlaylistManager
+            playlistManager.removeSongFromPlaylist(selectedSong, selectedPlaylist);
+
+            // Update the local model to reflect the changes
+            songsToBeViewed.remove(selectedSong);
+        } catch (Exception e) {
+            e.printStackTrace();  // Handle the exception appropriately for your application
+        }
+    }
 }

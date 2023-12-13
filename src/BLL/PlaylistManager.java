@@ -32,13 +32,18 @@ public class PlaylistManager {
         playlistDAO.deletePlaylist(playlist);
     }
 
-    /*public void addSongToPlaylist(Song song, Playlist playlist){
-
+    public void addSongToPlaylist(Song song, Playlist playlist) throws Exception {
+        // Validate parameters
+        if (song == null || playlist == null) {
+            throw new IllegalArgumentException("Song and playlist cannot be null.");
+        }
+        // Call the data access layer to add the song to the playlist
+        playlistDAO.addSongToPlaylist(song, playlist);
     }
     public void removeSongFromPlaylist(Song song, Playlist playlist){
 
     }
 
-     */
+
 
 }

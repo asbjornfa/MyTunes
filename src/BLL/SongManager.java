@@ -37,5 +37,9 @@ public class SongManager {
         songDAO.deleteSong(song);
     }
 
+    public void deleteSongFromPlaylist(Song song) throws Exception {
+        songDAO.deleteSongFromPlaylist(song);
+    }
+
 
 }

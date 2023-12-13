@@ -84,6 +84,25 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
+    @Override
+    public void addSongToPlaylist(Song song, Playlist playlist) throws Exception {
+            String sql = "INSERT INTO YTMusic.SongsInPlaylist (song_id, playlist_id) VALUES (?, ?)";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, song.getId());
+            stmt.setInt(2, playlist.getpId());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            throw new Exception("Could not add song to playlist", ex);
+        }
+
+
+
+    }
+
     public Playlist createPlaylist(Playlist playlist) throws Exception {
 
         String sql = "INSERT INTO YTMusic.Playlists (name) VALUES (?);";

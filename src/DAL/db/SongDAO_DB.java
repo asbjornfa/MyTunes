@@ -112,6 +112,27 @@ public class SongDAO_DB implements ISongDataAccess {
         return song;
     }
 
+    @Override
+    public Song deleteSongFromPlaylist(Song song) throws Exception {
+        String sql = "DELETE FROM YTMusic.SongsInPlaylist WHERE song_id = ?;";
+
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql))
+        {
+            // Bind parameters
+            stmt.setInt(1, song.getId());
+
+            stmt.executeUpdate();
+            // Run the specified SQL statement
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception("Could not delete song", ex);
+        }
+        return song;
+    }
+
     public List<Song> searchSongs(String query) throws Exception {
         throw new UnsupportedOperationException();
     }

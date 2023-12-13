@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Playlist;
 import BE.Song;
+import BLL.PlaylistManager;
 import GUI.Model.PlaylistModel;
 import GUI.Model.SongModel;
 import GUI.MusicPlayer;
@@ -120,9 +121,18 @@ public class MainController implements Initializable {
 
         colPName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
+        try {
+            // Initialize PlaylistManager and pass it to SongModel
+            // Needs to be changed, having trouble with using playlistmanager object
+            PlaylistManager playlistManager = new PlaylistManager();
+            songModel = new SongModel();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
+
         // Sets items in tblSongs
-
-
         if (songModel != null) {
             tblSongs.setItems(songModel.getObservableSongs());
         }
@@ -218,9 +228,6 @@ public class MainController implements Initializable {
         }
     }
 
-    public void DeleteSongInPlaylist(ActionEvent actionEvent) {
-        // Skal implemere funktioner
-    }
 
     public void NewPlaylist(ActionEvent actionEvent) {
         try {
@@ -266,10 +273,24 @@ public class MainController implements Initializable {
         if (selectedPlaylist != null && selectedSong != null) {
             try {
                 playlistModel.addSongsToPlaylist(selectedSong, selectedPlaylist);
-                playlistModel.loadSongsForPlaylist(selectedPlaylist.getpId());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+
+    public void DeleteSongInPlaylist(ActionEvent actionEvent) {
+        Song selectedSongs = (Song) lstSP.getSelectionModel().getSelectedItem();
+        Playlist selectedPlaylist = tblPlaylist.getSelectionModel().getSelectedItem();
+        if (selectedSongs != null && selectedPlaylist != null) {
+            try {
+                songModel.deleteSongFromPlaylist(selectedSongs, selectedPlaylist);
+            } catch (Exception e) {
+                displayError(e);
+                e.printStackTrace();
+            }
+
         }
     }
 

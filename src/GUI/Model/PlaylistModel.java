@@ -40,13 +40,20 @@ public class PlaylistModel {
         return FXCollections.observableArrayList(playlistManager.getAllSongsInPlaylist(playlistId));
     }
 
-
-
     public void addSongsToPlaylist(Song selectedSong, Playlist selectedPlaylist) {
+        if (selectedSong == null || selectedPlaylist == null) {
+            throw new IllegalArgumentException("Selected song and playlist cannot be null.");
+        }
 
-    }
+        try {
+            // Add the selected song to the selected playlist using PlaylistManager
+            playlistManager.addSongToPlaylist(selectedSong, selectedPlaylist);
 
-    public void loadSongsForPlaylist(int i) {
-
+            // Update the local model to reflect the changes
+            int index = playlistsToBeViewed.indexOf(selectedPlaylist);
+            playlistsToBeViewed.set(index, selectedPlaylist);
+        } catch (Exception e) {
+            e.printStackTrace();  // Handle the exception appropriately for your application
+        }
     }
 }
