@@ -99,6 +99,7 @@ public class MainController implements Initializable {
         if (selectedSong != null) {
             String filePath = "data/audio/" + selectedSong.getFilePath();
             musicPlayer.play(filePath);
+            lblSName.setText(selectedSong.getTitle());
         }
     }
 
