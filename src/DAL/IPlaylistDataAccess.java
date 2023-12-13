@@ -16,7 +16,7 @@ public interface IPlaylistDataAccess {
     public void deletePlaylist(Playlist playlist) throws Exception;
 
 
-    List<Song> getAllSongsInPlaylist(int playlistId) throws Exception;
+    List<Song> getAllSongsInPlaylist(Playlist playlist) throws Exception;
 
     public void addSongToPlaylist(Song song, Playlist playlist) throws Exception;
 }

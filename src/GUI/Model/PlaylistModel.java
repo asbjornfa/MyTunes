@@ -36,8 +36,7 @@ public class PlaylistModel {
     }
 
     public ObservableList<Song> getSongsForPlaylist(Playlist playlist) throws Exception {
-        int playlistId = playlist.getpId();
-        return FXCollections.observableArrayList(playlistManager.getAllSongsInPlaylist(playlistId));
+        return FXCollections.observableArrayList(playlistManager.getAllSongsInPlaylist(playlist));
     }
 
     public void addSongsToPlaylist(Song selectedSong, Playlist selectedPlaylist) {

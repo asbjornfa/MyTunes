@@ -46,7 +46,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
-    public List<Song> getAllSongsInPlaylist(int playlist_id) {
+    public List<Song> getAllSongsInPlaylist(Playlist playlist) {
         ArrayList<Song> allSongsInPlaylists = new ArrayList<>();
 
         String sql = "SELECT s.*, sip.playlist_id\n" +
@@ -58,7 +58,7 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
              PreparedStatement stmt = conn.prepareStatement(sql))
         {
 
-            stmt.setInt(1, playlist_id);
+            stmt.setInt(1, playlist.getpId());
 
             ResultSet rs = stmt.executeQuery();
 
@@ -159,13 +159,14 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
-    public void deleteFromPlaylist(Song song) throws Exception {
-        String sql = "Delete from YTMusic.SongsInPlaylist where song_id = ? ";
+    public void deleteFromPlaylist(Song song, Playlist playlist) throws Exception {
+        String sql = "Delete from YTMusic.SongsInPlaylist where playlist_id = ? AND song_id = ?";
 
         try(Connection conn = databaseConnector.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)) {
             // Bind parameters
             stmt.setInt(1, song.getId());
+            stmt.setInt(2, playlist.getpId());
 
             stmt.executeUpdate();
             // Run the specified SQL statement
