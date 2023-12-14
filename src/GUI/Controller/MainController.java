@@ -30,6 +30,9 @@ public class MainController implements Initializable {
     @FXML
     public TableView<Song> tblSongs;
     public TableView<Playlist> tblPlaylist;
+    public TableView<Song> tblSongsInPlaylist;
+    @FXML
+    public TableColumn<Song, String> colSongs;
     @FXML
     private ListView lstSP;
     @FXML
@@ -79,19 +82,23 @@ public class MainController implements Initializable {
 
     public void PlaySong(ActionEvent actionEvent) {
         playSelectedMusic();
+        playSelectedSPMusic();
     }
 
     public void StopSong(ActionEvent actionEvent) {
+
         stopSelectedMusic();
     }
 
     public void PauseSong(ActionEvent actionEvent) {
+
         pauseSelectedMusic();
     }
 
-    public void TableUpdate() {
+    /*public void TableUpdate() {
+
         tblSongs.refresh();
-    }
+    }*/
 
     // Overvej om de her selected methoder skal med, tror man kan skrive det nemmere.
     private void playSelectedMusic() {
@@ -103,6 +110,14 @@ public class MainController implements Initializable {
         }
     }
 
+    private void playSelectedSPMusic() {
+        Song selectedSong = (Song) lstSP.getSelectionModel().getSelectedItem();
+        if(selectedSong != null) {
+            String filePath = "data/audio/" + selectedSong.getFilePath();
+            musicPlayer.play(filePath);
+            lblSName.setText(selectedSong.getTitle());
+        }
+    }
 
     private void stopSelectedMusic() {
         musicPlayer.stop();
@@ -119,6 +134,7 @@ public class MainController implements Initializable {
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+
 
         colPName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
