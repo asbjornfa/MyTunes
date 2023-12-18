@@ -6,6 +6,7 @@ import BLL.PlaylistManager;
 import GUI.Model.PlaylistModel;
 import GUI.Model.SongModel;
 import GUI.MusicPlayer;
+import javafx.beans.InvalidationListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -95,10 +97,6 @@ public class MainController implements Initializable {
         pauseSelectedMusic();
     }
 
-    /*public void TableUpdate() {
-
-        tblSongs.refresh();
-    }*/
 
     // Overvej om de her selected methoder skal med, tror man kan skrive det nemmere.
     private void playSelectedMusic() {
@@ -130,21 +128,17 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TableView colums + BE getters
+        // TableView colums Song
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colArtist.setCellValueFactory(new PropertyValueFactory<>("artist"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
 
-
+        // TableView colums playlist
         colPName.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         try {
-            // Initialize PlaylistManager and pass it to SongModel
-            // Needs to be changed, having trouble with using playlistmanager object
-            PlaylistManager playlistManager = new PlaylistManager();
             songModel = new SongModel();
         } catch (Exception e) {
-
             e.printStackTrace();
         }
 
@@ -154,11 +148,13 @@ public class MainController implements Initializable {
             tblSongs.setItems(songModel.getObservableSongs());
         }
 
+        // Sets items in tblPlaylist
         if (playlistModel != null) {
             tblPlaylist.setItems(playlistModel.getObservablePlaylists());
         }
 
 
+        // Method that uses the listner function to see whats inside each playlist
         tblPlaylist.getSelectionModel().selectedItemProperty().addListener(
                 (observableValue, oldValue, newValue) -> {
                     if (newValue != null) {
@@ -179,8 +175,8 @@ public class MainController implements Initializable {
             }
         }));
         // Sets starting volume to 100
-       /* slidVolume.setValue(mediaPlayer.getVolume() *100);
-        slidVolume.valueProperty().addListener(new InvalidationListener() {
+
+        /*slidVolume.valueProperty().addListener(new InvalidationListener() {
 
             @Override
             public void invalidated(Observable observable) {
@@ -213,11 +209,10 @@ public class MainController implements Initializable {
         }
     }
 
-    /*
+
     public void Volume(MouseEvent mouseEvent) {
-        mediaPlayer.setVolume(slidVolume.getValue() * 100);
-        mediaPlayer.play();
-    } */
+        musicPlayer.setVolume(50);
+    }
 
     public void DeleteSong(ActionEvent actionEvent) {
         Song selectedSongs = tblSongs.getSelectionModel().getSelectedItem();
@@ -276,8 +271,6 @@ public class MainController implements Initializable {
         tblPlaylist.getItems().add(playlist);
     }
 
-    public void Volume(MouseEvent mouseEvent) {
-    }
 
 
     public void AddSongsToPlaylist(ActionEvent actionEvent) {

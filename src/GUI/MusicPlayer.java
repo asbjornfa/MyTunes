@@ -26,6 +26,18 @@ public class MusicPlayer {
         }
     }
 
+    public void setVolume(double volume) {
+        if (mediaPlayer != null) {
+            mediaPlayer.setVolume(volume);
+        }
+    }
+
+    public double getVolume() {
+        if (mediaPlayer != null) {
+            return mediaPlayer.getVolume();
+        }
+        return 0.0;
+    }
     public void pause() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
