@@ -12,16 +12,7 @@ public class Song {
 
     private String filePath;
 
-   /* private List<Playlist> playlists;
 
-    public List<Playlist> getPlaylist() {
-        return playlists;
-    }
-
-    public void setPlaylists(List<Playlist> playlists) {
-        this.playlists = playlists;
-    }
-    */
     public Song(int id, String title, String artist, String category, String filePath) {
         this.id = id;
         this.title = title;

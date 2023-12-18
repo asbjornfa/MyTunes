@@ -31,31 +31,21 @@ public class MainController implements Initializable {
     public TableColumn<Playlist, String> colPName;
     @FXML
     public TableView<Song> tblSongs;
-    public TableView<Playlist> tblPlaylist;
-    public TableView<Song> tblSongsInPlaylist;
     @FXML
-    public TableColumn<Song, String> colSongs;
+    public TableView<Playlist> tblPlaylist;
     @FXML
     private ListView lstSP;
     @FXML
     private Button btnStopMusic;
     @FXML
-    private Button btnBackwardsMusic;
-    @FXML
     private Button btnPlayMusic;
-    @FXML
-    private Button btnForwardMusic;
     @FXML
     private Button btnSearchS;
     @FXML
     private TextField txtSearchS;
     @FXML
-    private Slider slidVolume;
-    @FXML
     private Label lblSName;
 
-
-    //private MediaPlayer mediaPlayer;
 
     private MusicPlayer musicPlayer;
 
@@ -75,12 +65,7 @@ public class MainController implements Initializable {
         musicPlayer = new MusicPlayer();
     }
 
-    private void displayError(Throwable t) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Something went wrong");
-        alert.setHeaderText(t.getMessage());
-        alert.showAndWait();
-    }
+
 
     public void PlaySong(ActionEvent actionEvent) {
         playSelectedMusic();
@@ -92,13 +77,12 @@ public class MainController implements Initializable {
         stopSelectedMusic();
     }
 
+    // Works, but no need for this in our program.
     public void PauseSong(ActionEvent actionEvent) {
-
         pauseSelectedMusic();
     }
 
-
-    // Overvej om de her selected methoder skal med, tror man kan skrive det nemmere.
+    // Method for playing the selected song outside a playlist.
     private void playSelectedMusic() {
         Song selectedSong = tblSongs.getSelectionModel().getSelectedItem();
         if (selectedSong != null) {
@@ -108,6 +92,7 @@ public class MainController implements Initializable {
         }
     }
 
+    // Method for playing the selected song in our playlist.
     private void playSelectedSPMusic() {
         Song selectedSong = (Song) lstSP.getSelectionModel().getSelectedItem();
         if(selectedSong != null) {
@@ -121,6 +106,7 @@ public class MainController implements Initializable {
         musicPlayer.stop();
     }
 
+    // Works but no need for this in our program.
     private void pauseSelectedMusic() {
         musicPlayer.pause();
     }
@@ -159,30 +145,24 @@ public class MainController implements Initializable {
                 (observableValue, oldValue, newValue) -> {
                     if (newValue != null) {
                         try {
+                            // When a new item is selected, set the items of lstSP ListView
+                            // to the songs associated with the selected playlist using playlistModel
                             lstSP.setItems(playlistModel.getSongsForPlaylist(newValue));
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                        //System.out.println("works" + newValue);
                     }
                 });
 
         txtSearchS.textProperty().addListener(((observable, oldValue, newValue) -> {
             try {
+                // When the text property changes, invoke the searchSong method on the songModel
+                // This method is responsible for updating the search results based on the new input value
                 songModel.searchSong(newValue);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }));
-        // Sets starting volume to 100
-
-        /*slidVolume.valueProperty().addListener(new InvalidationListener() {
-
-            @Override
-            public void invalidated(Observable observable) {
-                mediaPlayer.setVolume(slidVolume.getValue() / 100);
-            }
-        }); */
     }
 
     public void closeMain(ActionEvent actionEvent) {
@@ -195,7 +175,9 @@ public class MainController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditSongWindow.fxml"));
             Parent root = loader.load();
 
+            // Retrieve the controller associated with the loaded FXML file.
             EditSongController editSongController = loader.getController();
+            // Set the main controller (this) in the EditSongController for communication.
             editSongController.setMainController(this);
 
             Stage editStage = new Stage();
@@ -204,15 +186,12 @@ public class MainController implements Initializable {
 
             editStage.show();
         } catch (IOException e) {
+            // DisplayError method is called.
             displayError(e);
             e.printStackTrace();
         }
     }
 
-
-    public void Volume(MouseEvent mouseEvent) {
-        musicPlayer.setVolume(50);
-    }
 
     public void DeleteSong(ActionEvent actionEvent) {
         Song selectedSongs = tblSongs.getSelectionModel().getSelectedItem();
@@ -240,7 +219,6 @@ public class MainController implements Initializable {
         }
     }
 
-
     public void NewPlaylist(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewPlaylistWindow.fxml"));
@@ -262,6 +240,7 @@ public class MainController implements Initializable {
     }
 
     public void addSongToTable(Song song) {
+
         tblSongs.getItems().add(song);
     }
 
@@ -270,8 +249,6 @@ public class MainController implements Initializable {
 
         tblPlaylist.getItems().add(playlist);
     }
-
-
 
     public void AddSongsToPlaylist(ActionEvent actionEvent) {
         Playlist selectedPlaylist = tblPlaylist.getSelectionModel().getSelectedItem();
@@ -289,19 +266,26 @@ public class MainController implements Initializable {
         }
     }
 
-
     public void DeleteSongInPlaylist(ActionEvent actionEvent) {
-        Song selectedSongs = (Song) lstSP.getSelectionModel().getSelectedItem();
+        Song selectedSongsInPlaylist = (Song) lstSP.getSelectionModel().getSelectedItem();
         Playlist selectedPlaylist = tblPlaylist.getSelectionModel().getSelectedItem();
-        if (selectedSongs != null && selectedPlaylist != null) {
+        if (selectedSongsInPlaylist != null && selectedPlaylist != null) {
             try {
-                songModel.deleteSongFromPlaylist(selectedSongs, selectedPlaylist);
+                playlistModel.deleteSongFromPlaylist(selectedSongsInPlaylist, selectedPlaylist);
+                System.out.println("MainController");
             } catch (Exception e) {
                 displayError(e);
                 e.printStackTrace();
             }
 
         }
+    }
+    //Error section.
+        private void displayError(Throwable t) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Something went wrong");
+            alert.setHeaderText(t.getMessage());
+            alert.showAndWait();
     }
 
         private void alertbox (String title, String content){

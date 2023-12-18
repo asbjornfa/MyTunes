@@ -135,12 +135,12 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
         }
     }
 
-    public void updatePlaylist(Playlist playlist) throws Exception {
+    // Not using this...
+   public void updatePlaylist(Playlist playlist) throws Exception {
         throw new UnsupportedOperationException();
-        /*String sql = "UPDATE YTMusic.Song SET title = ?, artist = ?, category = ? WHERE Song_id = ?";
+        //String sql = "UPDATE YTMusic.Song SET title = ?, artist = ?, category = ? WHERE Song_id = ?";
 
-         */
-    }
+   }
 
     public void deletePlaylist(Playlist playlist) throws Exception {
         String sql = "DELETE FROM YTMusic.Playlists WHERE playlist_id = ?;";
@@ -154,26 +154,23 @@ public class PlaylistDAO_DB implements IPlaylistDataAccess {
             // Run the specified SQL statement
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
-            //ex.printStackTrace();
-            //throw new Exception("Could not delete playlist", ex);
         }
     }
 
-    public void deleteFromPlaylist(Song song, Playlist playlist) throws Exception {
-        String sql = "Delete from YTMusic.SongsInPlaylist where playlist_id = ? AND song_id = ?";
+    public void deleteSongFromPlaylist(Playlist playlist, Song song) {
+        String sql = "DELETE FROM YTMusic.SongsInPlaylist WHERE playlist_id = (?) AND song_id = (?)";
 
-        try(Connection conn = databaseConnector.getConnection();
-        PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = databaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             // Bind parameters
-            stmt.setInt(1, song.getId());
-            stmt.setInt(2, playlist.getpId());
+            stmt.setInt(1, playlist.getpId());
+            stmt.setInt(2, song.getId());
 
             stmt.executeUpdate();
             // Run the specified SQL statement
+            System.out.println("PlaylistDAO");
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
     }
-
-
 }

@@ -11,9 +11,12 @@ public class PlaylistManager {
 
     private IPlaylistDataAccess playlistDAO;
 
+    private  PlaylistDAO_DB playlistDAO_DB;
+
     public PlaylistManager() throws IOException {
 
         playlistDAO = new PlaylistDAO_DB();
+        this.playlistDAO_DB = new PlaylistDAO_DB();
     }
 
     public List<Playlist> getAllplaylists() throws Exception {
@@ -40,10 +43,9 @@ public class PlaylistManager {
         // Call the data access layer to add the song to the playlist
         playlistDAO.addSongToPlaylist(song, playlist);
     }
-    public void removeSongFromPlaylist(Song song, Playlist playlist){
 
+    public void deletePlaylistSong(Playlist selectedPlaylist, Song selectedSongsInPlaylist) {
+        playlistDAO_DB.deleteSongFromPlaylist(selectedPlaylist, selectedSongsInPlaylist);
+        System.out.println("PlaylistManager");
     }
-
-
-
 }

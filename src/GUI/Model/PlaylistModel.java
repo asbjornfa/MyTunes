@@ -10,6 +10,8 @@ public class PlaylistModel {
 
     private ObservableList<Playlist> playlistsToBeViewed;
 
+    private ObservableList<Song> songsInPlaylistToBeViewed;
+
     private PlaylistManager playlistManager;
 
 
@@ -52,7 +54,13 @@ public class PlaylistModel {
             int index = playlistsToBeViewed.indexOf(selectedPlaylist);
             playlistsToBeViewed.set(index, selectedPlaylist);
         } catch (Exception e) {
-            e.printStackTrace();  // Handle the exception appropriately for your application
+            e.printStackTrace();
         }
+    }
+
+    public void deleteSongFromPlaylist(Song selectedSongsInPlaylist, Playlist selectedPlaylist) {
+        songsInPlaylistToBeViewed = FXCollections.observableArrayList();
+        playlistManager.deletePlaylistSong(selectedPlaylist, selectedSongsInPlaylist);
+        System.out.println("PlaylistModel");
     }
 }

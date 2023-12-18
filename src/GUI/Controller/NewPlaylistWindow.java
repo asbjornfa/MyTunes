@@ -40,20 +40,10 @@ public class NewPlaylistWindow {
         stage.close();
     }
 
-
-
     private void displayError(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Something went wrong");
         alert.setHeaderText(e.getMessage());
         alert.showAndWait();
     }
-
-
-
-
-
-
-
-
 }

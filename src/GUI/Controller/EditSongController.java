@@ -38,7 +38,7 @@ public class EditSongController {
 
     public void ChooseFile(ActionEvent actionEvent) throws SQLException, IOException {
         FileChooser chooser = new FileChooser();
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 Files", "*.mp3", "*.wav"));
+        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3 and wav Files", "*.mp3", "*.wav"));
 
         // Set the initial directory before showing the dialog
         File initialDirectory = new File("data/audio/");
@@ -48,12 +48,11 @@ public class EditSongController {
 
         if (selectedFile != null) {
             Path destinationPath = copyFile(selectedFile);
-
         }
 
         if (selectedFile != null) {
-            txtEditTitle.setText(selectedFile.getName()); // Tilføjelse af title
-            txtFName.setText(selectedFile.getName()); // FilePath added
+            txtEditTitle.setText(selectedFile.getName());
+            txtFName.setText(selectedFile.getName());
         }
     }
 
